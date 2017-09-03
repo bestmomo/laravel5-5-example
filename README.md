@@ -37,21 +37,16 @@
 * Custom error pages 403, 404 and 503
 * Authentication (registration, login, logout, password reset, mail confirmation, throttle)
 * Users roles : administrator (all access), redactor (create and edit post, upload and use medias in personnal directory), and user (create comment in blog)
-* Blog with comments
+* Blog with nested comments
 * Search in posts
 * Tags on posts
 * Contact us page
-* Admin dashboard with messages, users, posts, roles and comments
-* Users admin (roles filter, show, edit, delete, create, blog report)
-* Posts admin (list with dynamic order, show, edit, delete, create)
+* Admin dashboard with users, posts, articles, medias, settings, notifications and comments
 * Multi users medias gestion
 * Localization
 * Application tests
-* Use of new notifications to send emails and notify redactors for new comments
-
-### Assets ###
-
-CSS is compiled with Elixir, look at **gulpfile.js** for details.
+* Thumbs creation for images
+* Notifications to send emails and notify redactors for new comments
 
 ### Tricks ###
 
@@ -64,12 +59,10 @@ To use application the database is seeding with users :
 
 ### Tests ###
 
-When you want to launch the tests first rollback the database :
+When you want to launch the tests refresh and populate the database :
 
-`php artisan migrate:rollback`
+`php artisan migrate:fresh --seed`
 
-Then migrate and seed :
+You must have default settings.
 
-`php artisan migrate --seed`
-
-You can then use PHPUnit
+You can then use Dusk.
