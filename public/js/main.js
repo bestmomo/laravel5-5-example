@@ -159,9 +159,6 @@
 	   searchField.on('click', function(e){
 	      e.stopPropagation();
 	   });
-
-	   searchField.attr({placeholder: 'Type Your Keywords', autocomplete: 'off'});
-
    };
 	 
 

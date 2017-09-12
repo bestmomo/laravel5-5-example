@@ -28,7 +28,7 @@
 
 	<style>
 		.search-wrap .search-form::after {
-			content: @lang('Press Enter to begin your search.');
+			content: "@lang('Press Enter to begin your search.')";
 		}
 	</style>
 

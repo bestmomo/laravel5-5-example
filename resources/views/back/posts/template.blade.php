@@ -3,7 +3,7 @@
 @section('css')
     <style>
         textarea { resize: vertical; }
-        iframe { background-color: #00acd6,}
+        iframe { background-color: #00acd6; }
     </style>
     <link href="/adminlte/plugins/colorbox/colorbox.css" rel="stylesheet">
 @endsection
