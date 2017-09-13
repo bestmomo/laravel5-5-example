@@ -20,15 +20,9 @@ class AppServiceProvider extends ServiceProvider
     {
         setLocale(LC_TIME, config('app.locale'));
 
-        view()->composer(
-            ['front/*', 'auth/*'],
-            MenuComposer::class
-        );
+        view()->composer('front/layout',MenuComposer::class);
 
-        view()->composer(
-            ['back/*'],
-            HeaderComposer::class
-        );
+        view()->composer('back/layout',HeaderComposer::class);
 
         Blade::if('admin', function () {
             return auth()->user()->role === 'admin';
