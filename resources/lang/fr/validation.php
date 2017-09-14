@@ -97,9 +97,12 @@ return [
     |
     */
 
-    'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    'custom' => [
+        'tags' => [
+            'regex' => "Les marques, séparées par des virgules (sans espaces), doivent avoir au maximum 50 caractères.",
+        ],
+        'meta_keywords' => [
+            'regex' => "Les mots clés, séparés par des virgules (sans espaces), doivent avoir au maximum 50 caractères.",
         ],
     ],
 
