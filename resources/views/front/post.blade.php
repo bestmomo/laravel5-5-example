@@ -98,7 +98,7 @@
                     $level = 0;
                 @endphp
 				<ol class="commentlist">
-					@include('front/comments/comments', ['comments' => $parentComments])
+					@include('front/comments/comments', ['comments' => $post->parentComments])
 				</ol>
                 @if ($post->parent_comments_count > config('app.numberParentComments'))
                     <p id="morebutton" class="text-center">

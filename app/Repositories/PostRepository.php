@@ -143,17 +143,15 @@ class PostRepository
                 $q->select('title', 'slug');
             }
         ])
+        ->with(['parentComments' => function ($q) {
+            $q->with('allRepliesWithOwner')
+                ->latest()
+                ->take(config('app.numberParentComments'));
+        }])
         ->withCount('validComments')
         ->withCount('parentComments')
         ->whereSlug($slug)
         ->firstOrFail();
-
-        // Post comments
-        $parentComments = $post->parentComments()
-            ->with('allRepliesWithOwner')
-            ->latest()
-            ->take(config('app.numberParentComments'))
-            ->get();
 
         // Previous post
         $post->previous = $this->getPreviousPost($post->id);
@@ -161,7 +159,7 @@ class PostRepository
         // Next post
         $post->next = $this->getNextPost($post->id);
 
-        return compact('post', 'parentComments');
+        return compact('post');
     }
 
     /**
