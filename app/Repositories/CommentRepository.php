@@ -39,7 +39,7 @@ class CommentRepository
     public function getNextComments(Post $post, $page)
     {
         return $post->parentComments()
-            ->with('allRepliesWithOwner')
+            ->with('user')
             ->latest()
             ->skip($page * config('app.numberParentComments'))
             ->take(config('app.numberParentComments'))

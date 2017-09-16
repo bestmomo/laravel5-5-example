@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "barryvdh/laravel-elfinder": "^0.3.10",
+        "baum/baum": "^1.1",
         "bestmomo/laravel-email-confirmation": "^1.0",
         "bestmomo/laravel5-artisan-language": "^0.1.2",
         "creativeorange/gravatar": "^1.0",

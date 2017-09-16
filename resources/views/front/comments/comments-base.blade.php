@@ -51,14 +51,14 @@
 
         </div>
 
-        @if($comment->relationLoaded('allRepliesWithOwner'))
+        @unless ($comment->isLeaf())
             @php
                 $level++;
             @endphp
             <ul class="children">
-                @include('front/comments/comments', ['comments' => $comment->allRepliesWithOwner])
+                @include('front/comments/comments', ['comments' => $comment->getImmediateDescendants()])
             </ul>
-        @endif
+        @endunless
 
     </div>
 </li>

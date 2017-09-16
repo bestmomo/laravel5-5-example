@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'fr',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Creativeorange\Gravatar\GravatarServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
         /*
          * Application Service Providers...

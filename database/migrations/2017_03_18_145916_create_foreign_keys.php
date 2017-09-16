@@ -8,11 +8,11 @@ class CreateForeignKeys extends Migration {
 
 	public function up()
 	{
-		Schema::table('posts', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
-						->onUpdate('restrict');
-		});
+        Schema::table('posts', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')
+                        ->onDelete('restrict')
+                        ->onUpdate('restrict');
+        });
 		Schema::table('post_tag', function(Blueprint $table) {
 			$table->foreign('post_id')->references('id')->on('posts')
 						->onDelete('cascade')
@@ -31,11 +31,6 @@ class CreateForeignKeys extends Migration {
 		Schema::table('comments', function(Blueprint $table) {
 			$table->foreign('post_id')->references('id')->on('posts')
 						->onDelete('cascade')
-						->onUpdate('cascade');
-		});
-		Schema::table('comments', function(Blueprint $table) {
-			$table->foreign('parent_id')->references('id')->on('comments')
-						->onDelete('set null')
 						->onUpdate('cascade');
 		});
 		Schema::table('category_post', function(Blueprint $table) {

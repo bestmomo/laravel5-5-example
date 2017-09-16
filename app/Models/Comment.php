@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Events\ModelCreated;
+use Baum\Node;
 
-class Comment extends Model
+class Comment extends Node
 {
     use IngoingTrait;
 
@@ -42,38 +42,6 @@ class Comment extends Model
      */
     public function post()
     {
-        return $this->belongsTo(Post::class);
-    }
-
-    /**
-     * One to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function replies()
-    {
-        return $this->hasMany(__CLASS__, 'parent_id');
-    }
-
-    /**
-     * One to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function validReplies()
-    {
-        return $this->replies()->whereHas('user', function ($q) {
-            $q->whereValid(true);
-        })->latest();
-    }
-
-    /**
-     * One to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function allRepliesWithOwner()
-    {
-        return $this->validReplies()->with(__FUNCTION__, 'user');
+        return $this->belongsTo (Post::class);
     }
 }

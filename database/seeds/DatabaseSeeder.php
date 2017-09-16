@@ -281,12 +281,12 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        factory(Comment::class)->create([
+        $comment1 = factory(Comment::class)->create([
             'post_id' => 2,
             'user_id' => 3,
         ]);
 
-        factory(Comment::class)->create([
+        $comment2 = factory(Comment::class)->create([
             'post_id' => 4,
             'user_id' => 4,
         ]);
@@ -294,30 +294,30 @@ class DatabaseSeeder extends Seeder
         $nbrComments = $nbrPosts + 2;
 
         // Comments second level
-        factory(Comment::class)->create([
+        $comment3 = factory(Comment::class)->create([
             'post_id' => 2,
             'user_id' => 4,
-            'parent_id' => $nbrComments - 1,
-        ]);
+            //'parent_id' => $nbrComments - 1,
+        ])->makeChildOf($comment1);
 
         factory(Comment::class)->create([
             'post_id' => 4,
             'user_id' => 5,
-            'parent_id' => $nbrComments,
-        ]);
+            //'parent_id' => $nbrComments,
+        ])->makeChildOf($comment2);
 
         // Comments third level
         factory(Comment::class)->create([
             'post_id' => 2,
             'user_id' => 2,
-            'parent_id' => $nbrComments + 1,
-        ]);
+            //'parent_id' => $nbrComments + 1,
+        ])->makeChildOf($comment3);
 
         factory(Comment::class)->create([
             'post_id' => 2,
             'user_id' => 1,
-            'parent_id' => $nbrComments + 1,
-        ]);
+            //'parent_id' => $nbrComments + 1,
+        ])->makeChildOf($comment3);
 
     }
 }

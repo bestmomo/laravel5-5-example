@@ -144,7 +144,7 @@ class PostRepository
             }
         ])
         ->with(['parentComments' => function ($q) {
-            $q->with('allRepliesWithOwner')
+            $q->with('user')
                 ->latest()
                 ->take(config('app.numberParentComments'));
         }])
