@@ -36,5 +36,10 @@ return [
     'settings' => [
         'edit' => 'settings',
     ],
+    'categories' => [
+        'index' => 'categoriesGestion',
+        'create' => 'categoryCreate',
+        'edit' => 'categoryEdit',
+    ],
 
 ];

@@ -191,6 +191,8 @@ desired effect
             ],
           ])
 
+        <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i> <span>@lang('Categories')</span></a></li>
+
         @endadmin
 
         @include('back.partials.treeview', [

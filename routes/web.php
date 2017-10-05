@@ -50,45 +50,54 @@ Auth::routes();
 |--------------------------------------------------------------------------|
 */
 
-Route::prefix('admin')->middleware('redac')->namespace('Back')->group(function () {
+Route::prefix('admin')->namespace('Back')->group(function () {
 
-    Route::name('admin')->get('/', 'AdminController@index');
+    Route::middleware('redac')->group(function () {
 
-    // Posts
-    Route::name('posts.seen')->put('posts/seen/{post}', 'PostController@updateSeen')->middleware('can:manage,post');
-    Route::name('posts.active')->put('posts/active/{post}/{status?}', 'PostController@updateActive')->middleware('can:manage,post');
-    Route::resource('posts', 'PostController');
+        Route::name('admin')->get('/', 'AdminController@index');
 
-    // Notifications
-    Route::name('notifications.index')->get('notifications/{user}', 'NotificationController@index');
-    Route::name('notifications.update')->put('notifications/{notification}', 'NotificationController@update');
+        // Posts
+        Route::name('posts.seen')->put('posts/seen/{post}', 'PostController@updateSeen')->middleware('can:manage,post');
+        Route::name('posts.active')->put('posts/active/{post}/{status?}', 'PostController@updateActive')->middleware('can:manage,post');
+        Route::resource('posts', 'PostController');
 
-    // Medias
-    Route::view('medias', 'back.medias')->name('medias.index');
-});
+        // Notifications
+        Route::name('notifications.index')->get('notifications/{user}', 'NotificationController@index');
+        Route::name('notifications.update')->put('notifications/{notification}', 'NotificationController@update');
 
-Route::prefix('admin')->middleware('admin')->namespace('Back')->group(function () {
+        // Medias
+        Route::view('medias', 'back.medias')->name('medias.index');
 
-    // Users
-    Route::name('users.seen')->put('users/seen/{user}', 'UserController@updateSeen');
-    Route::name('users.valid')->put('users/valid/{user}', 'UserController@updateValid');
-    Route::resource('users', 'UserController', ['only' => [
-        'index', 'edit', 'update', 'destroy'
-    ]]);
+    });
 
-    // Contacts
-    Route::name('contacts.seen')->put('contacts/seen/{contact}', 'ContactController@updateSeen');
-    Route::resource('contacts', 'ContactController', ['only' => [
-        'index', 'destroy'
-    ]]);
+    Route::middleware('admin')->group(function () {
 
-    // Comments
-    Route::name('comments.seen')->put('comments/seen/{comment}', 'CommentController@updateSeen');
-    Route::resource('comments', 'CommentController', ['only' => [
-        'index', 'destroy'
-    ]]);
+        // Users
+        Route::name('users.seen')->put('users/seen/{user}', 'UserController@updateSeen');
+        Route::name('users.valid')->put('users/valid/{user}', 'UserController@updateValid');
+        Route::resource('users', 'UserController', ['only' => [
+            'index', 'edit', 'update', 'destroy'
+        ]]);
 
-    // Settings
-    Route::name('settings.edit')->get('settings', 'AdminController@settingsEdit');
-    Route::name('settings.update')->put('settings', 'AdminController@settingsUpdate');
+        // Categories
+        Route::resource('categories', 'CategoryController', ['except' => 'show']);
+
+        // Contacts
+        Route::name('contacts.seen')->put('contacts/seen/{contact}', 'ContactController@updateSeen');
+        Route::resource('contacts', 'ContactController', ['only' => [
+            'index', 'destroy'
+        ]]);
+
+        // Comments
+        Route::name('comments.seen')->put('comments/seen/{comment}', 'CommentController@updateSeen');
+        Route::resource('comments', 'CommentController', ['only' => [
+            'index', 'destroy'
+        ]]);
+
+        // Settings
+        Route::name('settings.edit')->get('settings', 'AdminController@settingsEdit');
+        Route::name('settings.update')->put('settings', 'AdminController@settingsUpdate');
+
+    });
+
 });

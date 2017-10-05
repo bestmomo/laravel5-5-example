@@ -12,6 +12,7 @@ return [
         'comments-name' => 'comments',
         'medias-name' => 'medias',
         'settings-name' => 'settings',
+        'categories-name' => 'categories',
     ],
     'titles' => [
         'dashboard' => 'Dashboard',
@@ -26,6 +27,9 @@ return [
         'commentsGestion' => 'Comments Gestion',
         'mediasGestion' => 'Medias Gestion',
         'settings' => 'Settings',
+        'categoriesGestion' => 'Categories Gestion',
+        'categoryCreate' => 'Category Creation',
+        'categoryEdit' => 'Category Edition',
     ],
     'menu' => [
         'dashboard' => 'Dashboard',

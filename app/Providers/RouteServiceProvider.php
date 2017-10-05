@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Models\User;
@@ -33,6 +34,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('post', function ($value) {
             return Post::with('ingoing', 'user', 'categories', 'tags')->findOrFail($value);
+        });
+
+        Route::bind('category', function ($value) {
+            return Category::findOrFail($value);
         });
     }
 

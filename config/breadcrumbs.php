@@ -67,5 +67,11 @@ return [
         'icon' => 'cog',
         'url' => '#',
     ],
+    'categories' =>
+    [
+        'name' => 'categories',
+        'icon' => 'list',
+        'url' => '/admin/categories',
+    ],
 
 ];

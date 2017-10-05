@@ -12,6 +12,7 @@ return [
         'comments-name' => 'commentaires',
         'medias-name' => 'medias',
         'settings-name' => 'réglages',
+        'categories-name' => 'catégories',
     ],
     'titles' => [
         'dashboard' => 'Tableau de bord',
@@ -26,6 +27,9 @@ return [
         'commentsGestion' => 'Gestion des commentaires',
         'mediasGestion' => 'Gestion des médias',
         'settings' => 'Réglages',
+        'categoriesGestion' => 'Gestion des catégories',
+        'categoryCreate' => 'Creation des catégories',
+        'categoryEdit' => 'Modification des catégories',
     ],
     'menu' => [
         'dashboard' => 'Tableau de bord',

@@ -158,7 +158,9 @@ var back = (function () {
         seen: seen,
         status: status,
         ordering: ordering,
-        filters: filters
+        filters: filters,
+        spin: spin,
+        unSpin: unSpin
     }
 
 })()
