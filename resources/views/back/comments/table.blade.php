@@ -17,7 +17,10 @@
                 <tr>
                     <td>{{ $comment->user->name }}</td>
                     <td>{{ $comment->user->email }}</td>
-                    <td><a href="{{ route('posts.display', [$comment->post->slug ]) }}">{{ $comment->post->title   }}</a></td>
+                    <td>
+                        <a href="{{ route('posts.display', [$comment->post->slug ]) }}">{{ $comment->post->title }}</a>
+                        <br><span class="badge">{{ $comment->post->comments->count() }}</span>
+                    </td>
                     <td>
                         <input type="checkbox" name="seen" value="{{ $comment->id }}" {{ is_null($comment->ingoing) ?  'disabled' : 'checked'}}>
                     </td>

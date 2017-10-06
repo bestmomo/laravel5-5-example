@@ -18,7 +18,11 @@ class CommentRepository
      */
     public function getAll($nbrPages, $parameters)
     {
-        return Comment::with ('ingoing', 'user', 'post' )
+        return Comment::with ([
+                'ingoing',
+                'user',
+                'post' => function ($query) { $query->with('comments'); }
+            ])
             ->latest()
             ->when ($parameters['new'], function ($query) {
                 $query->has ('ingoing');
