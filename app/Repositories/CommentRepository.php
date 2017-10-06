@@ -21,7 +21,7 @@ class CommentRepository
         return Comment::with ([
                 'ingoing',
                 'user',
-                'post' => function ($query) { $query->with('comments'); }
+                'post' => function ($query) { $query->withCount('comments'); }
             ])
             ->latest()
             ->when ($parameters['new'], function ($query) {
