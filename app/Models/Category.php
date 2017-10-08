@@ -23,7 +23,7 @@ class Category extends Model {
 	 */
 	public function getRouteKeyName()
 	{
-	    return 'slug';
+	    return request()->segment(1) === 'admin' ? 'id' : 'slug';
 	}
 
 	/**

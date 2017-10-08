@@ -35,10 +35,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('post', function ($value) {
             return Post::with('ingoing', 'user', 'categories', 'tags')->findOrFail($value);
         });
-
-        Route::bind('category', function ($value) {
-            return Category::findOrFail($value);
-        });
     }
 
     /**
