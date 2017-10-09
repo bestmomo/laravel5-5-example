@@ -69,3 +69,7 @@ When you want to launch the tests refresh and populate the database :
 You must have default settings and en language.
 
 You can then use Dusk.
+
+### License ###
+
+This example for Laravel is open-sourced software licensed under the MIT license
