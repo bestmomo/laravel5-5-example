@@ -2,28 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\Post;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\ {User, Post};
 
-class PostPolicy
+class PostPolicy extends Policy
 {
-    use HandlesAuthorization;
-
-    /**
-     * Grant all abilities to administrator.
-     *
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return bool
-     */
-    public function before(User $user, $ability)
-    {
-        if ($user->role === 'admin') {
-            return true;
-        }
-    }
-
     /**
      * Determine whether the user can manage the post.
      *

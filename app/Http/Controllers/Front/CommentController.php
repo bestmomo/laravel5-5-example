@@ -64,7 +64,7 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
-        $this->authorize('update', $comment);
+        $this->authorize('manage', $comment);
 
         $message = $request->input('message' . $comment->id);
         $comment->body = $message;
@@ -80,7 +80,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $this->authorize('delete', $comment);
+        $this->authorize('manage', $comment);
 
         $comment->delete();
 
