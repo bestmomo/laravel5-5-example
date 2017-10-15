@@ -79,7 +79,7 @@
 @endsection
 
 @section('js')
-    <script src="/adminlte/js/back.js"></script>
+    <script src="{{ asset('adminlte/js/back.js') }}"></script>
     <script>
 
         var user = (function () {

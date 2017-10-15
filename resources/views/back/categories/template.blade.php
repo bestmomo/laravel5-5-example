@@ -1,13 +1,5 @@
 @extends('back.layout')
 
-@section('css')
-    <style>
-        textarea { resize: vertical; }
-        iframe { background-color: #00acd6;}
-    </style>
-    <link href="/adminlte/plugins/colorbox/colorbox.css" rel="stylesheet">
-@endsection
-
 @section('main')
 
     @yield('form-open')
@@ -51,9 +43,7 @@
 
 @section('js')
 
-    <script src="/adminlte/plugins/colorbox/jquery.colorbox-min.js"></script>
-    <script src="/adminlte/plugins/voca/voca.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+    <script src="{{ asset('adminlte/plugins/voca/voca.min.js') }}"></script>
     <script>
 
         $('#slug').keyup(function () {

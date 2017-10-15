@@ -14,9 +14,9 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. -->
-  <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="{{ asset('adminlte/css/skins/skin-blue.min.css') }}">
 
   @yield('css')
 
@@ -287,7 +287,7 @@ desired effect
 @yield('js')
 
 <!-- AdminLTE App -->
-<script src="/adminlte/js/app.min.js"></script>
+<script src="{{ asset('adminlte/js/app.min.js') }}"></script>
 
 <!-- Commom -->
 {{--<script src="/adminlte/js/common.js"></script>--}}

@@ -1,7 +1,7 @@
 @extends('back.layout')
 
 @section('css')
-    <link rel="stylesheet" href="/adminlte/plugins/bootstrap-slider/slider.css">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-slider/slider.css') }}">
 @endsection
 
 @section('main')
@@ -340,7 +340,7 @@
 @endsection
 
 @section('js')
-    <script src="/adminlte/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <script src="{{ asset('adminlte/plugins/bootstrap-slider/bootstrap-slider.js') }}"></script>
     <script>
         $(function() {
             $('.slider').slider()

@@ -21,9 +21,9 @@
 
 	<!-- CSS
 	================================================== -->
-	<link rel="stylesheet" href="/css/base.css">
-	<link rel="stylesheet" href="/css/vendor.css">
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="{{ asset('css/base.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 	@yield('css')
 
 	<style>
@@ -219,8 +219,8 @@
    <!-- Java Script
    ================================================== -->
    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
-   <script src="/js/plugins.js"></script>
-   <script src="/js/main.js"></script>
+   <script src="{{ asset('js/plugins.js') }}"></script>
+   <script src="{{ asset('js/main.js') }}"></script>
    <script>
 	   $(function() {
 		   $('#logout').click(function(e) {
