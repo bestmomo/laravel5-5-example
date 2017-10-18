@@ -17,7 +17,7 @@
 |--------------------------------------------------------------------------|
 */
 
-Route::get('photo', 'PhotoController@create');
+Route::get('photo', 'PhotoController@create')->middleware('auth');
 Route::post('photo', 'PhotoController@store');
 
 Route::get('/tc', function () {
