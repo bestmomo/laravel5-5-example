@@ -7,7 +7,7 @@
 	<!--- basic page needs
 	================================================== -->
 	<meta charset="utf-8">
-	<title>{{ isset($post) && $post->seo_title ? $post->seo_title :  __(lcfirst('Title')) }}</title>
+	<title>{{ isset($post) && $post->seo_title ? $post->seo_title :  __(ucfirst('Title')) }} | Laravel</title>
 	<meta name="description" content="{{ isset($post) && $post->meta_description ? $post->meta_description : __('description') }}">
 	<meta name="author" content="@lang(lcfirst ('Author'))">
 	@if(isset($post) && $post->meta_keywords)
@@ -46,7 +46,9 @@
 </head>
 
 <body id="top">
-
+<?php
+debug($this)
+?>
 	<!-- header
    ================================================== -->
    <header class="short-header">

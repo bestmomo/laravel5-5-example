@@ -50,6 +50,13 @@ Route::get('article/{n}', function($n) {
     return view('article')->with('numero', $n);
 })->where('n', '[0-9]+');
 
+
+
+Route::get('users', 'UsersController@create');
+Route::post('users', 'UsersController@store');
+
+
+
 // Home
 Route::name('home')->get('/', 'Front\PostController@index');
 
