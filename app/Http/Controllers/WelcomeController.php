@@ -17,12 +17,14 @@ class WelcomeController extends Controller
     public function index($n=1)
     {
 
-Storage::disk('local')->put('recettes.txt', 'Contenu du fichier');
+	// Storage::disk('local')->put('recettes.txt', 'Contenu du fichier');
 
-    	echo '<h3><pre>';
-    	var_dump(config('database.connections.mysql'));
-    	echo '</pre></h3>';
+/*	
+		echo '<h3><pre>';
+		var_dump(config('database.connections.mysql'));
+		echo '</pre></h3>';
 
+*/	
     	if ($n==1) {
 			$contact['nom']     ='Lionel';
 			$contact['email']   ='MonEmail@ddd.ccc';
