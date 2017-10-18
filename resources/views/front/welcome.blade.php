@@ -11,6 +11,7 @@
 		}
 	</style>
 </head>
+
 <body>
 
 <h1>{{$a}}</h1>
@@ -23,6 +24,7 @@ $colors = (object)[];
 $colors->red = "#F00";
 $colors->slateblue = "#6A5ACD";
 $colors->orange = "#FFA500";
+
 
 foreach ($colors as $key => $value) : ?>
     <p style="background-color:<?= $value ?>">

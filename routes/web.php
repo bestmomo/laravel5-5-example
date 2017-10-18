@@ -16,6 +16,13 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
+Route::get('/tc', function () {
+    return new App\Mail\Contact([
+      'nom' => 'Durand',
+      'email' => 'durand@chezlui.com',
+      'message' => 'Je voulais vous dire que votre site est magnifique !'
+      ]);
+});
 
 Route::get('t', function () {
 	return redirect()->route('test');
