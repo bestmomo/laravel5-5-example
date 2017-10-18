@@ -16,6 +16,10 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
+
+Route::get('photo', 'PhotoController@create');
+Route::post('photo', 'PhotoController@store');
+
 Route::get('/tc', function () {
     return new App\Mail\Contact([
       'nom' => 'Durand',
