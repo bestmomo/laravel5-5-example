@@ -17,6 +17,38 @@
 |--------------------------------------------------------------------------|
 */
 
+Route::get('t', function () {
+	return redirect()->route('test');
+});
+
+
+Route::get('test', function () {
+
+$oColl = new stdClass();
+
+$oColl = (object)[];
+$oColl->clef1=(object)[];
+$oColl->clef1->id='clé1';
+$oColl->clef1->couleur='rouge';
+
+$oColl->clef2=(object)[];
+$oColl->clef2->id='clé2';
+$oColl->clef2->couleur='vert';
+
+ // dd($oColl);
+
+//$oVal->key1->var1 = "something"; // the warning is ignored thanks to @
+//$oVal->key1->var2 = "something else";
+
+
+    return view ('front.test', ['oColl' => $oColl]);
+    // ->withNumero(57)->withParent('Pierre');
+})->name('test');
+
+Route::get('article/{n}', function($n) {
+    return view('article')->with('numero', $n);
+})->where('n', '[0-9]+');
+
 // Home
 Route::name('home')->get('/', 'Front\PostController@index');
 
