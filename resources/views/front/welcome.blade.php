@@ -12,30 +12,11 @@
 	</style>
 </head>
 <body>
-{% if !($oColl) %}
-	Valeur:
-}
-<ul>
-	<li><?= $oColl->clef1->id; ?>: <?= $oColl->clef1->couleur; ?></li>
-	<li><?= $oColl->clef2->id; ?>: <?= $oColl->clef2->couleur; ?></li>
-</ul>
-    <hr>
 
-@foreach ($oColl as $item => $clef)		
-	<h3><?= ucfirst($item) ?></h3>
+<h1>{{$a}}</h1>
 
-<ul>
-	@foreach($clef as $k => $v)
-		<li>{{ $k }} : {{ $v }}</li>
-	@endforeach
-</ul>
+Valeur de n = {{$n}}
 
-
-
-
-@endforeach
-
-{% endif %}
 
 <?php
 $colors = (object)[];
@@ -48,9 +29,7 @@ foreach ($colors as $key => $value) : ?>
         <?= ucfirst($key) ?> : <?= $value ?>
     </p>
 <?php endforeach; ?>
-<br><br>
 
-{{ (2+3) }}
 
     
 </body>

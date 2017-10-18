@@ -21,6 +21,7 @@ Route::get('t', function () {
 	return redirect()->route('test');
 });
 
+Route::get('w/{n?}', 'WelcomeController@index')->where('n', '[0-9]+')->name('welcome');
 
 Route::get('test', function () {
 
