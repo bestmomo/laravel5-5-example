@@ -9,6 +9,7 @@ use App\Events\ModelCreated;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable {
+
 	use Notifiable, IngoingTrait;
 
 	/**
@@ -26,26 +27,22 @@ class User extends Authenticatable {
 	 *
 	 * @var array
 	 */
-	protected $fillable
-		= [
-			'name',
-			'email',
-			'password',
-			'role',
-			'confirmed',
-			'valid'
-		];
+	protected $fillable = [ 'name',
+	                        'email',
+	                        'password',
+	                        'role',
+	                        'confirmed',
+	                        'valid'
+	];
 
 	/**
 	 * The attributes that should be hidden for arrays.
 	 *
 	 * @var array
 	 */
-	protected $hidden
-		= [
-			'password',
-			'remember_token',
-		];
+	protected $hidden = [ 'password',
+	                      'remember_token',
+	];
 
 	/**
 	 * One to Many relation
