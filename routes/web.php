@@ -76,6 +76,7 @@ Route::get( 'article/{n}', function ( $n ) {
 } )->where( 'n', '[0-9]+' );
 
 
+
 Route::get( 'users', 'UsersController@create' );
 Route::post( 'users', 'UsersController@store' );
 

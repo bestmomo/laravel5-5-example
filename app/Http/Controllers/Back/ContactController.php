@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\ {
-    Models\Contact,
-    Repositories\ContactRepository,
-    Http\Controllers\Controller
-};
+use App\Models\Contact;
+use App\Repositories\ContactRepository;
+use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
