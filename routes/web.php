@@ -16,6 +16,7 @@
 | Frontend
 |--------------------------------------------------------------------------|
 */
+use \App\Models\User;
 
 Route::get( 'u', function () {
 	return new View( 'u' );
@@ -57,8 +58,16 @@ Route::get( 'test', function () {
 //$oVal->key1->var1 = "something"; // the warning is ignored thanks to @
 //$oVal->key1->var2 = "something else";
 
+		// $users = User::find([1,3,5]);
+		// $users = User::where('id', '<', 3)->select('id','name','email')->get();
+		// $users =  DB::table('users')->select('id','name','email')->orderBy('id', 'desc')->latest()->first();
+		// $users =  DB::select('select id, name, email from users order by id desc limit ?', [3]);
+		$users =  DB::table('users')->select('id','name','email')->latest('id')->take(3)->get();
+	// $users=$users->getFilesDirectory();
 
-	return view( 'front.test', [ 'oColl' => $oColl ] );
+	// dd($users);
+
+	return view( 'front.test', [ 'oColl' => $oColl, 'users' => $users ] );
 	// ->withNumero(57)->withParent('Pierre');
 } )->name( 'test' );
 

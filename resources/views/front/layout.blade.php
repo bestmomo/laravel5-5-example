@@ -24,6 +24,8 @@
 		<link rel="stylesheet" href="{{ asset('css/base.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 		@yield('css')
 
 		<style>

@@ -41,7 +41,8 @@ class WelcomeController extends Controller {
 							mail('grcote7@gmail.com', 'Contact', $contact['message'], $headers );
 			*/
 
-			$a = self::ENVOI;
+			//$a = self::ENVOI;
+
 
 			return view( 'emails.contact', [ 'contact' => $contact ] );
 		}
