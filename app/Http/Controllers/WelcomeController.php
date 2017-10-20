@@ -23,7 +23,7 @@ class WelcomeController extends Controller {
 				echo '</pre></h3>';
 
 		*/
-		if ( $n == 1 ) {
+		if ( $n === 1 ) {
 			$contact['nom']     = 'Lionel';
 			$contact['email']   = 'MonEmail@ddd.ccc';
 			$contact['message'] = 'Tatati... V4 simplifié.';

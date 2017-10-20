@@ -93,3 +93,5 @@ class User extends Authenticatable {
 		return null;
 	}
 }
+
+// C:\Windows\System32\cmd.exe -login -i

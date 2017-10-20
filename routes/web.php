@@ -17,6 +17,11 @@
 |--------------------------------------------------------------------------|
 */
 
+Route::get( 'u', function () {
+	return new View( 'u' );
+} );
+
+
 Route::get( 'photo', 'PhotoController@create' )->middleware( 'auth' );
 Route::post( 'photo', 'PhotoController@store' );
 
