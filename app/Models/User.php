@@ -49,7 +49,8 @@ class User extends Authenticatable {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function posts() {
+	public function posts()
+	{
 		return $this->hasMany( Post::class );
 	}
 
@@ -58,7 +59,8 @@ class User extends Authenticatable {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function comments() {
+	public function comments()
+	{
 		return $this->hasMany( Comment::class );
 	}
 
@@ -71,7 +73,8 @@ class User extends Authenticatable {
 	 *
 	 * @return void
 	 */
-	public function sendPasswordResetNotification( $token ) {
+	public function sendPasswordResetNotification( $token )
+	{
 		$this->notify( new ResetPasswordNotification( $token ) );
 	}
 
@@ -80,7 +83,8 @@ class User extends Authenticatable {
 	 *
 	 * @return string|null
 	 */
-	public function getFilesDirectory() {
+	public function getFilesDirectory()
+	{
 		if ( $this->role === 'redac' ) {
 			$folderPath = 'user' . $this->id;
 			if ( ! in_array( $folderPath, Storage::disk( 'files' )->directories() ) ) {
@@ -93,5 +97,3 @@ class User extends Authenticatable {
 		return null;
 	}
 }
-
-// C:\Windows\System32\cmd.exe -login -i

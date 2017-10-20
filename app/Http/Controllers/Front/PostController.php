@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
+//use DB;
 use \App\Models\Tag;
+use App\Models\User;
 use \App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -44,9 +46,57 @@ class PostController extends Controller {
 	 */
 	public function index()
 	{
-		$posts = $this->postRepository->getActiveOrderByDate( $this->nbrPages );
+		//$posts = $this->postRepository->getActiveOrderByDate( $this->nbrPages );
+		//
+		//return view( 'front.index', compact( 'posts' ) );
 
-		return view( 'front.index', compact( 'posts' ) );
+
+		//$users = DB::table( 'users' )
+		//	->select( 'id', 'name', 'email' )
+		//	->latest( 'id' )
+		//	->take( 3 )
+		//	->get();
+
+
+		//$users = DB::table( 'users' )
+		//           ->Having( 'id', '%', 2 )
+		//           ->select( 'id', 'email' )
+		//           ->get();
+
+		//
+		// $users = DB::select( 'select id, name, email from users where not id%2 order by id' );
+		//
+
+
+		//$monRedaco = User::find( 2 );
+		//$monRedaco->email='Redac@la.fr';
+		//$monRedaco->save();
+
+
+		//echo User::find(3)->posts[0]->title;
+
+
+		// $users = User::has( 'posts' )->get();
+
+
+		$users = User::take(2)->get();
+
+
+
+		//
+		//echo '<pre>';
+		//	//var_dump( $users );
+		//echo '</pre>';
+		//
+
+
+		//foreach ( $users as $user ) {
+		//	echo '<strong>' . $user->name . '</strong><br>';
+		//	foreach ( $user->posts as $post ) {
+		//		echo $post->title . '<br>';
+		//	}
+		//}
+		return view( 'front.listdo', compact( 'users' ) );
 	}
 
 	/**
