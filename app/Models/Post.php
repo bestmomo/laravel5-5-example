@@ -42,7 +42,8 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function user() {
+	public function user()
+	{
 		return $this->belongsTo( User::class );
 	}
 
@@ -51,7 +52,8 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function tags() {
+	public function tags()
+	{
 		return $this->belongsToMany( Tag::class );
 	}
 
@@ -60,7 +62,8 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function comments() {
+	public function comments()
+	{
 		return $this->hasMany( Comment::class );
 	}
 
@@ -69,7 +72,8 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\hasMany
 	 */
-	public function validComments() {
+	public function validComments()
+	{
 		return $this->comments()->whereHas( 'user', function ( $query ) {
 			$query->whereValid( TRUE );
 		} );
@@ -80,7 +84,8 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\hasMany
 	 */
-	public function parentComments() {
+	public function parentComments()
+	{
 		return $this->validComments()->whereParentId( null );
 	}
 
@@ -89,7 +94,14 @@ class Post extends Model {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
 	 */
-	public function categories() {
+	public function categories()
+	{
 		return $this->belongsToMany( Category::class );
+	}
+
+
+	public function userWithName()
+	{
+		return $this->belongsTo('User')->select(array('id', 'name', 'email'));
 	}
 }

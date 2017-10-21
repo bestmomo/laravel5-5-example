@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Front;
 use DB;
 use \App\Models\Tag;
 use App\Models\User;
+use App\Models\Post;
 use \App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \App\Repositories\PostRepository;
 use \App\Http\Requests\SearchRequest;
 use Illuminate\Support\Collection;
+
+use \App\Repositories\UserRepository;
 
 class PostController extends Controller {
 	/**
@@ -34,10 +37,12 @@ class PostController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct( PostRepository $postRepository )
+	public function __construct( UserRepository $userRepository, PostRepository $postRepository )
 	{
 		$this->postRepository = $postRepository;
 		$this->nbrPages       = config( 'app.nbrPages.front.posts' );
+
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -48,8 +53,12 @@ class PostController extends Controller {
 	public function index()
 	{
 		//$posts = $this->postRepository->getActiveOrderByDate( $this->nbrPages );
-		//
 		//return view( 'front.index', compact( 'posts' ) );
+
+
+
+
+		$users = $this->userRepository->getTitlesByDateDesc();
 
 
 		//$users = DB::table( 'users' )
@@ -107,11 +116,9 @@ class PostController extends Controller {
 		//echo '</pre>';
 
 
-		//
 		//echo '<pre>';
-		//	//var_dump( $users );
+		//var_dump( $users );
 		//echo '</pre>';
-		//
 
 
 		//foreach ( $users as $user ) {
@@ -133,14 +140,46 @@ class PostController extends Controller {
 										 ->get();
 		*/
 
+		/*
+				$users = \App\Models\User::has('posts')->get();
+				foreach($users as $user) {
+					echo $user->name . '<br>';
+				}
+
+
+			 // TOP Bonne requête
+					$users = User::withCount( 'posts' )
+											 ->with( [ 'posts' => function ( $query ) {
+												 $query->latest();
+											 }
+															 ] )
+											 ->having( 'posts_count', '>', 0 )
+											 ->orderBy( 'name', 'asc' )
+											 ->get();
+			*/
+
+
+		//->with( [ 'posts' =>
+		//           function ( $q ) {
+		//             $q->select( 'id', 'title' );
+		//           }
+		//        ] )
+
+/*
 		$users = User::withCount( 'posts' )
 		             ->with( [ 'posts' => function ( $query ) {
 			             $query->latest();
 		             }
 		                     ] )
 		             ->having( 'posts_count', '>', 0 )
-		             ->orderBy( 'name', 'asc' )
-		             ->get();
+		             //->orderBy( 'posts.id', 'desc' )
+		             ->get();*/
+
+
+		//echo '<pre>';
+		//var_dump( $users );
+		//echo '</pre>';
+
 
 		//echo $users->name . '<hr>';
 
@@ -148,18 +187,20 @@ class PostController extends Controller {
 		//$users=$users->toJson();
 
 
-		//$users=Collection::times(10, function   ($i) {
-		//	return $i*9;
+		//$tableMultiplication=Collection::times(12, function   ($i) {
+		//	return $i. ' x 9 = ' . $i*9;
 		//});
 
 
 		//return $users;
+
+
 		//->select( 'id', 'name', 'email', 'posts_count' )
 
 
 		//echo '<pre>'; var_dump( $users ); echo '</pre>';
 
-		debug( $users );
+		//debug( $users );
 
 //		$users=[];
 		return view( 'front.listdo', compact( 'users' ) );

@@ -2,9 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Models\Post;
 use App\Models\User;
 
+
 class UserRepository {
+
 	/**
 	 * Get users collection paginate.
 	 *
@@ -54,4 +57,70 @@ class UserRepository {
 			$user->ingoing->delete();
 		}
 	}
+
+	public function getTitlesByDateDesc()
+	{
+
+
+		//$users = User::with( 'posts' )
+		//             ->with( [ 'posts' => function ( $query ) {
+		//	             $query->select( 'title' );
+		//	             $query->latest();
+		//             }
+		//                     ] )
+		//             ->withCount( 'posts' )
+		//	           ->having( 'posts_count', '=', 1 )
+		//             ->orderBy( 'name', 'asc' )
+		//             ->get();
+		//->select( 'id', 'name', 'email' )
+
+
+		//$users = Post::select( 'title' )->get();
+
+// Bonne joiture
+//		$users = User::leftJoin( 'posts', 'posts.user_id', '=', 'users.id')
+//			->select('users.id', 'email', 'name', 'posts.id as PostId', 'title' )
+//			->get();
+
+
+		// Optimale
+		//$users = User::select()
+		//	//->with( 'posts' )
+		//	           ->select( 'users.id', 'email', 'name', 'posts.id as postId', 'title' )
+		//             ->leftJoin( 'posts', 'posts.user_id', '=', 'users.id' )
+		//             ->orderBy( 'name', 'asc' )
+		//             ->withCount( 'posts' )
+		//             ->having( 'posts_count', '>=', 1 )
+		//             ->get();
+
+
+		$users = User::with( 'posts' )
+		             ->with( [ 'posts' => function ( $query ) {
+			             $query->select( 'user_id', 'title', 'slug' );
+			             $query->latest();
+		             }
+		                     ] )
+		             ->select( 'id', 'name', 'email' )
+		             ->withCount( 'posts' )
+		             ->having( 'posts_count', '>', 0 )
+		             ->orderBy( 'posts_count', 'desc' )
+		             ->get();
+
+
+		//$users = User::with( 'posts' )
+		//             ->get();
+
+
+		return $users;
+
+//debug($u);
+
+//$users->pop();
+//echo $users[0]->posts[0]->title;
+		//die ('oki<hr>');
+//die();
+//		return $users;
+
+	}
+
 }

@@ -26,9 +26,12 @@
 					Nombre d'articles: <strong>{{ $user->posts_count }}</strong></td>
 
 					<td><strong>{{ ucfirst($user->email) }}</strong><br>
+
 						@foreach ($user->posts as $post)
-							- {{$post->title}}<br>
+							- <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+							 <br>
 						@endforeach
+
 					</td>
 
 				</tr>

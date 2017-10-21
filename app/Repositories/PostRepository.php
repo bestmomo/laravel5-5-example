@@ -9,6 +9,7 @@ use App\Models\Comment;
 //use App\Services\Thumb;
 
 class PostRepository {
+
 	/**
 	 * The Tag instance.
 	 *
