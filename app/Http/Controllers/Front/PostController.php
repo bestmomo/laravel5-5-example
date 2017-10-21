@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-//use DB;
+use DB;
 use \App\Models\Tag;
 use App\Models\User;
 use \App\Models\Category;
@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \App\Repositories\PostRepository;
 use \App\Http\Requests\SearchRequest;
+use Illuminate\Support\Collection;
 
 class PostController extends Controller {
 	/**
@@ -90,18 +91,20 @@ class PostController extends Controller {
 		// L'eager loading
 
 
-		$users = User::with( [ 'posts' => function ( $query ) {
-			$query->where( 'title', 'like', '%ost%' );
-			$query->latest( 'title' );
-		}
-		                     ] )
-		             ->where( 'id', '<', 3 )
-		             ->take( 5 )
-		             ->get();
+		// Exemple avec tri + restrictions
+		//$users = User::with( [ 'posts' => function ( $query ) {
+		//	$query->where( 'title', 'like', '%ost%' );
+		//	$query->latest( 'title' );
+		//}
+		//                     ] )
+		//             ->where( 'id', '<', 3 )
+		//             ->take( 5 )
+		//             ->get();
 
-		echo '<pre>';
+
+		//echo '<pre>';
 		//var_dump( $users );
-		echo '</pre>';
+		//echo '</pre>';
 
 
 		//
@@ -117,6 +120,48 @@ class PostController extends Controller {
 		//		echo $post->title . '<br>';
 		//	}
 		//}
+
+
+		/*
+				$users = User::with( [ 'posts' => function ( $query ) {
+					$query->where( 'title', 'like', '%ost%' );
+					$query->latest( 'title' );
+				}
+														 ] )
+										 ->where( 'id', '<', 30 )
+										 ->take( 50 )
+										 ->get();
+		*/
+
+		$users = User::withCount( 'posts' )
+		             ->with( [ 'posts' => function ( $query ) {
+			             $query->latest();
+		             }
+		                     ] )
+		             ->having( 'posts_count', '>', 0 )
+		             ->orderBy( 'name', 'asc' )
+		             ->get();
+
+		//echo $users->name . '<hr>';
+
+
+		//$users=$users->toJson();
+
+
+		//$users=Collection::times(10, function   ($i) {
+		//	return $i*9;
+		//});
+
+
+		//return $users;
+		//->select( 'id', 'name', 'email', 'posts_count' )
+
+
+		//echo '<pre>'; var_dump( $users ); echo '</pre>';
+
+		debug( $users );
+
+//		$users=[];
 		return view( 'front.listdo', compact( 'users' ) );
 	}
 

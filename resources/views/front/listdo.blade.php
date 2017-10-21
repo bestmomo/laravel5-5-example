@@ -6,28 +6,41 @@
 
 @section('main')
 <hr>
-	<div class="maingc7">
+<div class="maingc7">
 
-<h3>Auteurs de posts</h3>
 
-<table>
-	<th><td>Nom</td><td>Email</td></th>
+	@if ( count($users)>0 )
 
-	@foreach($users as $user)
-		<tr>
-			<td>{{ $user->id }}</td>
-			<td>{{ ucfirst($user->name) }}</td>
-			<td><strong>{{ ucfirst($user->email) }}</strong><br>
+	<h3>Auteurs de posts</h3>
 
-				@foreach ($user->posts as $post)
-					- {{$post->title}}<br>
-				@endforeach
+		<table>
 
-			</td>
-		</tr>
-	@endforeach
+			<th><td>Nom</td><td>Email</td></th>
 
-</table>
+			@foreach($users as $user)
+				<tr>
+
+					<td>{{ $user->id }}</td>
+
+					<td>{{ ucfirst($user->name) }}<br>
+					Nombre d'articles: <strong>{{ $user->posts_count }}</strong></td>
+
+					<td><strong>{{ ucfirst($user->email) }}</strong><br>
+						@foreach ($user->posts as $post)
+							- {{$post->title}}<br>
+						@endforeach
+					</td>
+
+				</tr>
+			@endforeach
+
+		</table>
+
+	@else
+
+		Rien à afficher.
+
+	@endif
 
 	</div>
 
