@@ -59,9 +59,9 @@ class PostController extends Controller {
 
 
 		//$users = DB::table( 'users' )
-		//           ->Having( 'id', '%', 2 )
-		//           ->select( 'id', 'email' )
-		//           ->get();
+		//  ->Having( 'id', '%', 2 )
+		//  ->select( 'id', 'email' )
+		//  ->get();
 
 		//
 		// $users = DB::select( 'select id, name, email from users where not id%2 order by id' );
@@ -78,9 +78,30 @@ class PostController extends Controller {
 
 		// $users = User::has( 'posts' )->get();
 
+		// 5 requêtes !!!
+		//$users = User::has( 'posts' )->take( 2 )->get();
+		//$users = User::take( 2 )->get();
+		// Lazy loading (Chargement paresseux)
 
-		$users = User::take(2)->get();
+		// 2 requêtes (y) ( + classement ici par titre)
+		//$users = User::with( ['posts'=> function ($query) {
+		//	$query->latest('title');
+		//}])->take( 2 )->get();
+		// L'eager loading
 
+
+		$users = User::with( [ 'posts' => function ( $query ) {
+			$query->where( 'title', 'like', '%ost%' );
+			$query->latest( 'title' );
+		}
+		                     ] )
+		             ->where( 'id', '<', 3 )
+		             ->take( 5 )
+		             ->get();
+
+		echo '<pre>';
+		//var_dump( $users );
+		echo '</pre>';
 
 
 		//
