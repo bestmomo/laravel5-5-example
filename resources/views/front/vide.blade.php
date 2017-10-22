@@ -1,4 +1,4 @@
-@extends('template')
+@extends('template', ['title'=> "Vue Dev"])
 
 @section('contenu')
 <div class="maingc7">

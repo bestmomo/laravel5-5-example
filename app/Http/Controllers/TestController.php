@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,11 +10,9 @@ use Illuminate\Http\Request;
 class testController extends Controller {
 	public function index()
 	{
-	$v = $this->testManyToMany();
+		//$v = $this->testManyToMany();
 
-
-
-
+		echo 'Ok';
 
 
 		if ( isset( $v ) ) {
@@ -36,7 +35,7 @@ class testController extends Controller {
 		$posts = Post::with( 'categories' )
 		             ->with( [ 'categories' => function ( $query ) {
 			             $query->select( 'title', 'slug' );
-			             $query->latest( 'categories.id' );
+			             $query->orderBy( 'categories.title' );
 		             }
 		                     ] )
 		             ->select( 'id', 'title' )
@@ -57,5 +56,36 @@ class testController extends Controller {
 
 		//echo $i;
 		return $lst;
+	}
+
+	public function attachDetachSync()
+	{
+
+
+		$p = Post::find( 1 );
+		echo $p->title . '<br>';
+
+
+		foreach ( $p->categories as $c ) {
+			echo $c->title . '<br>';
+		}
+
+
+		$c_id = Category::whereId( 2 )->first()->id;
+		//$c_id = Category::whereId( 1 )
+		//->select ('id');
+
+		debug( $c_id );
+
+		//$p->categories()->attach( $c_id );
+		//$p->categories()->attach( [1,3] );
+		//$p->categories()->detach( $c_id );
+		//$p->categories()->detach( 2 );
+		//$p->categories()->sync([1,3]);  Attach 1 et 3 détache tous les autres
+		//$p->categories()->sync([]); // Détache tout
+		//$p->categories()->syncWithoutDetaching([2]);
+		//$p->categories()->toggle([1,2]);
+
+
 	}
 }
