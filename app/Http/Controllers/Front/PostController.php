@@ -52,13 +52,81 @@ class PostController extends Controller {
 	 */
 	public function index()
 	{
-		//$posts = $this->postRepository->getActiveOrderByDate( $this->nbrPages );
-		//return view( 'front.index', compact( 'posts' ) );
+		$posts = $this->postRepository->getActiveOrderByDate( $this->nbrPages );
+
+		return view( 'front.index', compact( 'posts' ) );
+
+	}
+
+	/**
+	 * Display a listing of the posts for the specified category.
+	 *
+	 * @param  \App\Models\Category $category
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function category( Category $category )
+	{
+		$posts = $this->postRepository->getActiveOrderByDateForCategory( $this->nbrPages, $category->slug );
+		$info  = __( 'Posts for category: ' ) . '<strong>' . $category->title . '</strong>';
+
+		return view( 'front.index', compact( 'posts', 'info' ) );
+	}
+
+	/**
+	 * Display the specified post by slug.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param  string                   $slug
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show( Request $request, $slug )
+	{
+		$user = $request->user();
+
+		debug($user);
 
 
+		return view( 'front.post', array_merge( $this->postRepository->getPostBySlug( $slug ), compact( 'user' ) ) );
+	}
+
+	/**
+	 * Get posts for specified tag
+	 *
+	 * @param  \App\Models\Tag $tag
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function tag( Tag $tag )
+	{
+		$posts = $this->postRepository->getActiveOrderByDateForTag( $this->nbrPages, $tag->id );
+		$info  = __( 'Posts found with tag ' ) . '<strong>' . $tag->tag . '</strong>';
+
+		return view( 'front.index', compact( 'posts', 'info' ) );
+	}
+
+	/**
+	 * Get posts with search
+	 *
+	 * @param  \App\Http\Requests\SearchRequest $request
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function search( SearchRequest $request )
+	{
+		$search = $request->search;
+		$posts  = $this->postRepository->search( $this->nbrPages, $search )->appends( compact( 'search' ) );
+		$info   = __( 'Posts found with search: ' ) . '<strong>' . $search . '</strong>';
+
+		return view( 'front.index', compact( 'posts', 'info' ) );
+	}
+
+	public function getTitlesEachAuthor()
+	{
 
 
-		$users = $this->userRepository->getTitlesByDateDesc();
+		$users = $this->getTitlesByDateDesc();
 
 
 		//$users = DB::table( 'users' )
@@ -165,15 +233,15 @@ class PostController extends Controller {
 		//           }
 		//        ] )
 
-/*
-		$users = User::withCount( 'posts' )
-		             ->with( [ 'posts' => function ( $query ) {
-			             $query->latest();
-		             }
-		                     ] )
-		             ->having( 'posts_count', '>', 0 )
-		             //->orderBy( 'posts.id', 'desc' )
-		             ->get();*/
+		/*
+				$users = User::withCount( 'posts' )
+										 ->with( [ 'posts' => function ( $query ) {
+											 $query->latest();
+										 }
+														 ] )
+										 ->having( 'posts_count', '>', 0 )
+										 //->orderBy( 'posts.id', 'desc' )
+										 ->get();*/
 
 
 		//echo '<pre>';
@@ -204,66 +272,73 @@ class PostController extends Controller {
 
 //		$users=[];
 		return view( 'front.listdo', compact( 'users' ) );
+
 	}
 
-	/**
-	 * Display a listing of the posts for the specified category.
-	 *
-	 * @param  \App\Models\Category $category
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function category( Category $category )
+	public function getTitlesByDateDesc()
 	{
-		$posts = $this->postRepository->getActiveOrderByDateForCategory( $this->nbrPages, $category->slug );
-		$info  = __( 'Posts for category: ' ) . '<strong>' . $category->title . '</strong>';
 
-		return view( 'front.index', compact( 'posts', 'info' ) );
+
+		//$users = User::with( 'posts' )
+		//             ->with( [ 'posts' => function ( $query ) {
+		//	             $query->select( 'title' );
+		//	             $query->latest();
+		//             }
+		//                     ] )
+		//             ->withCount( 'posts' )
+		//	           ->having( 'posts_count', '=', 1 )
+		//             ->orderBy( 'name', 'asc' )
+		//             ->get();
+		//->select( 'id', 'name', 'email' )
+
+
+		//$users = Post::select( 'title' )->get();
+
+// Bonne joiture
+//		$users = User::leftJoin( 'posts', 'posts.user_id', '=', 'users.id')
+//			->select('users.id', 'email', 'name', 'posts.id as PostId', 'title' )
+//			->get();
+
+
+		// Optimale
+		//$users = User::select()
+		//	//->with( 'posts' )
+		//	           ->select( 'users.id', 'email', 'name', 'posts.id as postId', 'title' )
+		//             ->leftJoin( 'posts', 'posts.user_id', '=', 'users.id' )
+		//             ->orderBy( 'name', 'asc' )
+		//             ->withCount( 'posts' )
+		//             ->having( 'posts_count', '>=', 1 )
+		//             ->get();
+
+
+		$users = User::with( 'posts' )
+		             ->with( [ 'posts' => function ( $query ) {
+			             $query->select( 'user_id', 'title', 'slug' );
+			             $query->latest();
+		             }
+		                     ] )
+		             ->select( 'id', 'name', 'email' )
+		             ->withCount( 'posts' )
+		             ->having( 'posts_count', '>', 0 )
+		             ->orderBy( 'posts_count', 'desc' )
+		             ->get();
+
+
+		//$users = User::with( 'posts' )
+		//             ->get();
+
+
+		return $users;
+
+//debug($u);
+
+//$users->pop();
+//echo $users[0]->posts[0]->title;
+		//die ('oki<hr>');
+//die();
+//		return $users;
+
 	}
 
-	/**
-	 * Display the specified post by slug.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  string                   $slug
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Request $request, $slug )
-	{
-		$user = $request->user();
 
-		return view( 'front.post', array_merge( $this->postRepository->getPostBySlug( $slug ), compact( 'user' ) ) );
-	}
-
-	/**
-	 * Get posts for specified tag
-	 *
-	 * @param  \App\Models\Tag $tag
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function tag( Tag $tag )
-	{
-		$posts = $this->postRepository->getActiveOrderByDateForTag( $this->nbrPages, $tag->id );
-		$info  = __( 'Posts found with tag ' ) . '<strong>' . $tag->tag . '</strong>';
-
-		return view( 'front.index', compact( 'posts', 'info' ) );
-	}
-
-	/**
-	 * Get posts with search
-	 *
-	 * @param  \App\Http\Requests\SearchRequest $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function search( SearchRequest $request )
-	{
-		$search = $request->search;
-		$posts  = $this->postRepository->search( $this->nbrPages, $search )->appends( compact( 'search' ) );
-		$info   = __( 'Posts found with search: ' ) . '<strong>' . $search . '</strong>';
-
-		return view( 'front.index', compact( 'posts', 'info' ) );
-	}
 }

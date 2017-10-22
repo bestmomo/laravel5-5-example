@@ -15,12 +15,16 @@
 
 		<table>
 
-			<th><td>Nom</td><td>Email</td></th>
+			<td style="text-align: right;">Classement</td></td><td>Nom</td><td>Email</td>
+			@php
+				$i=0
+			@endphp
 
 			@foreach($users as $user)
+
 				<tr>
 
-					<td>{{ $user->id }}</td>
+					<td style="text-align: right;">{{++$i}}</td>
 
 					<td>{{ ucfirst($user->name) }}<br>
 					Nombre d'articles: <strong>{{ $user->posts_count }}</strong></td>

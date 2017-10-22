@@ -58,11 +58,11 @@ Route::get( 'test', function () {
 //$oVal->key1->var1 = "something"; // the warning is ignored thanks to @
 //$oVal->key1->var2 = "something else";
 
-		// $users = User::find([1,3,5]);
-		// $users = User::where('id', '<', 3)->select('id','name','email')->get();
-		// $users =  DB::table('users')->select('id','name','email')->orderBy('id', 'desc')->latest()->first();
-		// $users =  DB::select('select id, name, email from users order by id desc limit ?', [3]);
-		$users =  DB::table('users')->select('id','name','email')->latest('id')->take(3)->get();
+	// $users = User::find([1,3,5]);
+	// $users = User::where('id', '<', 3)->select('id','name','email')->get();
+	// $users =  DB::table('users')->select('id','name','email')->orderBy('id', 'desc')->latest()->first();
+	// $users =  DB::select('select id, name, email from users order by id desc limit ?', [3]);
+	$users = DB::table( 'users' )->select( 'id', 'name', 'email' )->latest( 'id' )->take( 3 )->get();
 	// $users=$users->getFilesDirectory();
 
 	// dd($users);
@@ -74,7 +74,6 @@ Route::get( 'test', function () {
 Route::get( 'article/{n}', function ( $n ) {
 	return view( 'article' )->with( 'numero', $n );
 } )->where( 'n', '[0-9]+' );
-
 
 
 Route::get( 'users', 'UsersController@create' );
@@ -91,9 +90,17 @@ Route::name( 'home' )->get( '/', 'Front\PostController@index' );
 Route::name( 'contacts.create' )->get( 'contacts', 'Front\ContactController@create' );
 Route::name( 'contacts.store' )->post( 'contacts', 'Front\ContactController@store' );
 
+//Route::get( 'posts/authors', function () {
+//	return 'ok21';
+//} );
 
 // Posts and comments
+
+
 Route::prefix( 'posts' )->namespace( 'Front' )->group( function () {
+
+	Route::name( 'posts.authors' )->get( 'authors', 'PostController@getTitlesEachAuthor' );
+
 	Route::name( 'posts.display' )->get( '{slug}', 'PostController@show' );
 	Route::name( 'posts.tag' )->get( 'tag/{tag}', 'PostController@tag' );
 	Route::name( 'posts.search' )->get( '', 'PostController@search' );
@@ -101,7 +108,10 @@ Route::prefix( 'posts' )->namespace( 'Front' )->group( function () {
 	Route::name( 'posts.comments.comments.store' )
 	     ->post( '{post}/comments/{comment}/comments', 'CommentController@store' );
 	Route::name( 'posts.comments' )->get( '{post}/comments/{page}', 'CommentController@comments' );
-} );
+
+
+
+});
 
 Route::resource( 'comments', 'Front\CommentController', [
 	'only'  => [ 'update', 'destroy' ],
