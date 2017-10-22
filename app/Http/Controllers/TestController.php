@@ -5,24 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class testController extends Controller {
-	public function index()
+class TestController extends Controller {
+
+	protected $postRepository;
+
+	public function index( PostRepository $postRepository )
 	{
-		//$v = $this->testManyToMany();
-		//$v = $this->getPostsCategories();
 
-		//echo 'Débug GC7';
-
-		//$v=User::find(1);
-
-
+		
 		if ( isset( $v ) ) {
 			debug( $v );
 		}
 
-		//$v='Ok';
 		return view( 'front.vide', compact( 'v' ) );
 
 	}
