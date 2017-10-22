@@ -27,15 +27,15 @@ class testController extends Controller {
 
 	}
 
-
 	public function testManyToMany()
 	{
 		return $this->getPostsCategories();
 	}
 
 	public function getPostsCategories()
-	{
-		$posts = Post::with( 'categories' )
+	{ 
+
+	$posts = Post::with( 'categories' )
 		             ->with( [ 'categories' => function ( $query ) {
 			             $query->select( 'title', 'slug' );
 			             $query->orderBy( 'categories.title' );
@@ -50,7 +50,7 @@ class testController extends Controller {
 			$lst[] = '<strong>' . $p->title . '</strong>';
 			$i ++;
 			foreach ( $p->categories as $c ) {
-				$lst[] = $c->title . '';
+				$lst[] = $c->title . ' ( ' . $c->slug. ' )';
 				$i ++;
 			}
 			$lst[ $i - 1 ] .= '<br>';

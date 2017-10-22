@@ -20,7 +20,6 @@ use \App\Models\User;
 
 Route::get( 'v', 'TestController@index' );
 
-
 Route::get( 'u', function () {
 
 	return view( 'u' );
