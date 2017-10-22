@@ -18,8 +18,12 @@
 */
 use \App\Models\User;
 
+Route::get( 'v', 'TestController@index');
+
+
 Route::get( 'u', function () {
-	return new View( 'u' );
+
+	return view( 'u' );
 } );
 
 
@@ -110,8 +114,7 @@ Route::prefix( 'posts' )->namespace( 'Front' )->group( function () {
 	Route::name( 'posts.comments' )->get( '{post}/comments/{page}', 'CommentController@comments' );
 
 
-
-});
+} );
 
 Route::resource( 'comments', 'Front\CommentController', [
 	'only'  => [ 'update', 'destroy' ],
