@@ -18,7 +18,7 @@
 */
 use \App\Models\User;
 
-Route::get( 'v', 'TestController@index');
+Route::get( 'v', 'TestController@index' );
 
 
 Route::get( 'u', function () {
@@ -103,7 +103,7 @@ Route::name( 'contacts.store' )->post( 'contacts', 'Front\ContactController@stor
 
 Route::prefix( 'posts' )->namespace( 'Front' )->group( function () {
 
-	Route::name( 'posts.authors' )->get( 'authors', 'PostController@getTitlesEachAuthor' );
+	Route::name( 'posts.authors' )->get( 'auteurs', 'PostController@getTitlesEachAuthor' );
 
 	Route::name( 'posts.display' )->get( '{slug}', 'PostController@show' );
 	Route::name( 'posts.tag' )->get( 'tag/{tag}', 'PostController@tag' );

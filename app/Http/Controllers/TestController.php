@@ -11,8 +11,11 @@ class testController extends Controller {
 	public function index()
 	{
 		//$v = $this->testManyToMany();
+		$v = $this->getPostsCategories();
 
-		echo 'Ok';
+		//echo 'Débug GC7';
+
+		//$v=User::find(1);
 
 
 		if ( isset( $v ) ) {

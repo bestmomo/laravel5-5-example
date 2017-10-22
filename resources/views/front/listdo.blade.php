@@ -15,7 +15,7 @@
 
 		<table>
 
-			<td style="text-align: right;">Classement</td></td><td>Nom</td><td>Email</td>
+			<td style="text-align: right;">Classement</td></td><td>Nom</td><td>Email / Posts</td>
 			@php
 				$i=0
 			@endphp

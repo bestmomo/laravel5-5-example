@@ -7,7 +7,7 @@
 @endsection
 
 @section('main')
-<p class="" style="text-align: right; margin-right: 50px;"><a href="authors" style="color:blue">Nouveau: Classement des auteurs</a></p>
+<p class="" style="text-align: right; margin-right: 50px;"><a href="auteurs" style="color:blue">Nouveau: Classement des auteurs</a></p>
 
    <!-- content
    ================================================== -->
