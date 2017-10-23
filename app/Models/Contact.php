@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Events\ModelCreated;
+use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
     use IngoingTrait;
+
+    protected $table='contacts';
 
     /**
      * The event map for the model.
@@ -24,4 +26,5 @@ class Contact extends Model
      * @var array
      */
     protected $fillable = ['name', 'email', 'message'];
+
 }

@@ -7,6 +7,7 @@
 @endsection
 
 @section('main')
+<p class="" style="text-align: right; margin-right: 50px;"><a href="auteurs" style="color:blue">Nouveau: Classement des auteurs</a></p>
 
    <!-- content
    ================================================== -->
@@ -27,7 +28,7 @@
 					<h1 class="page-title">{{ $post->title }}</h1>
 
 					<ul class="entry-meta">
-						<li class="date">{{ $post->created_at->formatLocalized('%A %d %B %Y') }}</li>
+						<li class="date">{{ ucfirst($post->created_at->formatLocalized('%A %d %B %Y')) }}</li>
                         <li class="cat">
                             @foreach ($post->categories as $category)
                                 <a href="{{ route('category', [$category->slug]) }}">{{ $category->title }}</a>
