@@ -5,7 +5,7 @@
     <!-- masonry
     ================================================== -->
     <section id="bricks">
-
+        
         <div class="row masonry">
             @isset($info)
                 @component('front.components.alert')

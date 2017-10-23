@@ -1,0 +1,34 @@
+body {
+    color: #0c0c0c;
+    background-color: cornsilk;
+}
+
+.maingc7 {
+    width: 97%;
+    margin: 10px auto 0 auto;
+    padding: 5px 0 0;
+    border: 1px solid grey;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    background-color: white;
+}
+
+.maingc7 h3 {
+    padding-left: 10px;
+}
+
+pre {
+    margin-top: 7px;
+    color: blue;
+    line-height: 1.1;
+    height: 790px;
+}
+
+.lightgreen {
+    color: #DEFF00;
+}
+
+.listgc7 {
+    list-style: none;
+}

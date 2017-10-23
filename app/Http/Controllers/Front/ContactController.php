@@ -37,7 +37,7 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request)
     {
-        Contact::create ($request->all ());
+       dd( Contact::create ($request->all ()));
 
         return back ()->with ('ok', __('Your message has been recorded, we will respond as soon as possible.'));
     }
