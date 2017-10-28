@@ -10,10 +10,10 @@ class TestController extends Controller {
 
 	protected $postRepository;
 
-	public function index( PostRepository $postRepository )
+	public function index()
 	{
 
-		
+
 		if ( isset( $v ) ) {
 			debug( $v );
 		}
