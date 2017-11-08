@@ -66,7 +66,7 @@ When you want to launch the tests refresh and populate the database :
 
 `php artisan migrate:fresh --seed`
 
-You must have default settings and en language.
+You must have default settings and **en** language. You must also add provider in **config/app.php**.
 
 You can then use Dusk.
 

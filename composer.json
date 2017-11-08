@@ -6,7 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "barryvdh/laravel-elfinder": "^0.3.10",
+        "barryvdh/laravel-elfinder": "^0.3.11",
         "baum/baum": "^1.1",
         "bestmomo/laravel-email-confirmation": "^1.0",
         "bestmomo/laravel5-artisan-language": "^0.1.2",
@@ -45,6 +45,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "laravel/dusk"
             ]
         }
     },
