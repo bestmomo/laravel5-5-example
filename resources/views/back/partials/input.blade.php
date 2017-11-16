@@ -12,7 +12,7 @@
         </div>
     @elseif ($input['input'] === 'select')
         <select multiple required class="form-control" name="{{ $input['name'] }}[]" id="{{ $input['name'] }}">
-            @foreach($categories as $id => $title)
+            @foreach($input['options'] as $id => $title)
                 <option value="{{ $id }}" {{ old($input['name']) ? (in_array($id, old($input['name'])) ? 'selected' : '') : ($input['values']->contains('id', $id) ? 'selected' : '') }}>{{ $title }}</option>
             @endforeach
         </select>
