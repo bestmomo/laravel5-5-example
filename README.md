@@ -46,7 +46,7 @@
 * Contact us page
 * Admin dashboard with users, posts, articles, medias, settings, notifications and comments
 * Multi users medias gestion
-* Localization
+* Localization (English, French and Chinese)
 * Application tests
 * Thumbs creation for images
 * Notifications to send emails and notify redactors for new comments
