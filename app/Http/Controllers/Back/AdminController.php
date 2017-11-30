@@ -2,120 +2,124 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\ {
-    Http\Controllers\Controller,
-    Http\Requests\SettingsRequest,
-    Repositories\ConfigAppRepository,
-    Repositories\EnvRepository,
-    Services\PannelAdmin
-};
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SettingsRequest;
+use App\Repositories\ConfigAppRepository;
+use App\Repositories\EnvRepository;
+use App\Services\PannelAdmin;
+
 use Illuminate\Support\Facades\Artisan;
 
-class AdminController extends Controller
-{
-    /**
-     * Show the admin dashboard.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        $pannels = [];
+class AdminController extends Controller {
+	/**
+	 * Show the admin dashboard.
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function index()
+	{
+		$pannels = [ ];
 
-        foreach (config('pannels') as $pannel) {
+		foreach ( config( 'pannels' ) as $pannel ) {
 
-            $panelAdmin = new PannelAdmin($pannel);
+			$panelAdmin = new PannelAdmin( $pannel );
 
-            if ($panelAdmin->nbr) {
-                $pannels[] = $panelAdmin;
-            }
-        }
+			debug($pannel['color']);
 
-        return view('back.index', compact('pannels'));
-    }
 
-    /**
-     * Show the settings page
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function settingsEdit()
-    {
-        $actualLocale = config ('app.locale');
-        $locales = locales();
+			if ( $panelAdmin->nbr ) {
+				$pannels[] = $panelAdmin;
+			}
+		}
 
-        $actualDriver = env('MAIL_DRIVER');
-        $drivers = [
-            'smtp' =>'SMTP',
-            'mail' => 'PHP'
-        ];
+		return view( 'back.index', compact( 'pannels' ) );
+	}
 
-        $actualTimezone = config ('app.timezone');
-        $timezones = timezones ();
+	/**
+	 * Show the settings page
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function settingsEdit()
+	{
+		$actualLocale = config( 'app.locale' );
+		$locales      = locales();
 
-        $actualCacheDriver = env('CACHE_DRIVER');
-        $caches = ['apc', 'array', 'database', 'file', 'memcached', 'redis'];
+		$actualDriver = env( 'MAIL_DRIVER' );
+		$drivers      = [
+			'smtp' => 'SMTP',
+			'mail' => 'PHP'
+		];
 
-        $actualConnection = env('DB_CONNECTION');
-        $connections = ['mysql', 'sqlite', 'pgsql'];
+		$actualTimezone = config( 'app.timezone' );
+		$timezones      = timezones();
 
-        return view('back.settings', compact (
-            'locales',
-            'actualLocale',
-            'drivers',
-            'actualDriver',
-            'timezones',
-            'actualTimezone',
-            'caches',
-            'actualCacheDriver',
-            'connections',
-            'actualConnection'
-        ));
-    }
+		$actualCacheDriver = env( 'CACHE_DRIVER' );
+		$caches            = [ 'apc', 'array', 'database', 'file', 'memcached', 'redis' ];
 
-    /**
-     * Update settings
-     *
-     * @param \App\Http\Requests\SettingsRequest $request
-     * @param \App\Repositories\ConfigAppRepository $appRepository
-     * @param \App\Repositories\EnvRepository $envRepository
-     * @return \Illuminate\Http\RedirectResponse
-     * @internal param ConfigAppRepository $repository
-     */
-    public function settingsUpdate(
-        SettingsRequest $request,
-        ConfigAppRepository $appRepository,
-        EnvRepository $envRepository)
-    {
-        $inputs = $request->except ('_method', '_token', 'page');
+		$actualConnection = env( 'DB_CONNECTION' );
+		$connections      = [ 'mysql', 'sqlite', 'pgsql' ];
 
-        $envRepository->update (array_filter($inputs, function ($key) {
-            return strpos ($key, '_');
-        }, ARRAY_FILTER_USE_KEY ));
+		return view( 'back.settings', compact(
+			'locales',
+			'actualLocale',
+			'drivers',
+			'actualDriver',
+			'timezones',
+			'actualTimezone',
+			'caches',
+			'actualCacheDriver',
+			'connections',
+			'actualConnection'
+		) );
+	}
 
-        $appRepository->update(array_filter($inputs, function ($key) {
-            return !strpos ($key, '_');
-        }, ARRAY_FILTER_USE_KEY ));
+	/**
+	 * Update settings
+	 *
+	 * @param \App\Http\Requests\SettingsRequest    $request
+	 * @param \App\Repositories\ConfigAppRepository $appRepository
+	 * @param \App\Repositories\EnvRepository       $envRepository
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 * @internal param ConfigAppRepository $repository
+	 */
+	public function settingsUpdate(
+		SettingsRequest $request,
+		ConfigAppRepository $appRepository,
+		EnvRepository $envRepository )
+	{
+		$inputs = $request->except( '_method', '_token', 'page' );
 
-        $cache = $this->checkCache () ? ' ' . __('Config cache has been updated.'): '';
+		$envRepository->update( array_filter( $inputs, function ( $key ) {
+			return strpos( $key, '_' );
+		}, ARRAY_FILTER_USE_KEY ) );
 
-        $request->session ()->flash ('ok', __('Settings have been successfully saved. ') . $cache);
+		$appRepository->update( array_filter( $inputs, function ( $key ) {
+			return ! strpos( $key, '_' );
+		}, ARRAY_FILTER_USE_KEY ) );
 
-        return redirect()->route('settings.edit', ['page' => $request->page]);
-    }
+		$cache = $this->checkCache() ? ' ' . __( 'Config cache has been updated.' ) : '';
 
-    /**
-     * Check and refresh cache if exists
-     *
-     * @return bool
-     */
-    protected function checkCache ()
-    {
-        if (file_exists (app()->getCachedConfigPath ())) {
-            Artisan::call('config:clear');
-            Artisan::call('config:cache');
-            return true;
-        }
-        return false;
-    }
+		$request->session()->flash( 'ok', __( 'Settings have been successfully saved. ' ) . $cache );
+
+		return redirect()->route( 'settings.edit', [ 'page' => $request->page ] );
+	}
+
+	/**
+	 * Check and refresh cache if exists
+	 *
+	 * @return bool
+	 */
+	protected function checkCache()
+	{
+		if ( file_exists( app()->getCachedConfigPath() ) ) {
+			Artisan::call( 'config:clear' );
+			Artisan::call( 'config:cache' );
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
 }
