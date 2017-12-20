@@ -45,8 +45,8 @@
                                     @include('back.partials.input', [
                                         'input' => [
                                             'title' => __('Application name'),
-                                            'name' => 'name',
-                                            'value' => old('name', config('app.name')),
+                                            'name' => 'app_name',
+                                            'value' => old('app_name', config('app.name')),
                                             'input' => 'text',
                                             'required' => true,
                                         ],

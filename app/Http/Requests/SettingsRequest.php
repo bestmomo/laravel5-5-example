@@ -16,7 +16,7 @@ class SettingsRequest extends Request
         switch ($this->page) {
             case 1:
                 return [
-                    'name' => 'bail|required|max:255',
+                    'app_name' => 'bail|required|max:255',
                     'app_url' => 'bail|required|max:255',
                     'locale' => [
                         'bail',
