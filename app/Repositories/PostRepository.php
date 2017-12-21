@@ -82,10 +82,10 @@ class PostRepository {
 	public function getAll( $nbrPages, $parameters )
 	{
 		return $this->model->with( 'ingoing' )
-		                   ->orderBy( $parameters['order'], $parameters['direction'] )
-		                   ->when( $parameters['active'], function ( $query ) {
+		                   ->orderBy( $parameters[ 'order' ], $parameters[ 'direction' ] )
+		                   ->when( $parameters[ 'active' ], function ( $query ) {
 			                   $query->whereActive( TRUE );
-		                   } )->when( $parameters['new'], function ( $query ) {
+		                   } )->when( $parameters[ 'new' ], function ( $query ) {
 				$query->has( 'ingoing' );
 			} )->when( auth()->user()->role === 'redac', function ( $query ) {
 				$query->whereHas( 'user', function ( $query ) {
@@ -147,11 +147,12 @@ class PostRepository {
 				                            $q->select( 'title', 'slug' );
 			                            }
 		                            ] )
-		                    ->with( [ 'parentComments' => function ( $q ) {
-			                    $q->with( 'user' )
-			                      ->latest()
-			                      ->take( config( 'app.numberParentComments' ) );
-		                    }
+		                    ->with( [
+			                            'parentComments' => function ( $q ) {
+				                            $q->with( 'user' )
+				                              ->latest()
+				                              ->take( config( 'app.numberParentComments' ) );
+			                            }
 		                            ] )
 		                    ->withCount( 'validComments' )
 		                    ->withCount( 'parentComments' )
