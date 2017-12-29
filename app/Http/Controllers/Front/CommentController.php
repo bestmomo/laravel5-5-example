@@ -12,7 +12,7 @@ use App\ {
 };
 
 class CommentController extends Controller
-{
+{*
     /**
      * Create a new CommentController instance.
      *

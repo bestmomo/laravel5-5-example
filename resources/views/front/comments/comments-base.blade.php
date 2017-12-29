@@ -18,9 +18,9 @@
             @endif
 
             <div class="comment-meta">
-                <time class="comment-time" datetime="{{ $comment->created_at }}">{{ $comment->created_at->formatLocalized('%A %d %B %Y') }}</time>
+                <time class="comment-time" datetime="{{ $comment->created_at }}">{{ ucfirst(utf8_encode($comment->created_at->formatLocalized('%A %d %B %Y'))) }}</time>
                 @if(Auth::check() && $level < config('app.commentsNestedLevel'))
-                    <span class="sep">/</span><a id="reply-create{!! $comment->id !!}" class="reply" href="#">@lang('Reply')</a>
+                    <span class="sep">|</span><a id="reply-create{!! $comment->id !!}" class="reply" href="#">@lang('Reply')</a>
                     <form id="reply-form{{ $comment->id }}" method="post" action="{{ route('posts.comments.comments.store', [$post->id, $comment->id]) }}" class="reply-form hide">
                         {{ csrf_field() }}
                         <div class="form-field">
