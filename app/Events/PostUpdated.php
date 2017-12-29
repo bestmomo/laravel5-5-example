@@ -2,24 +2,22 @@
 
 namespace App\Events;
 
-use Illuminate\ {
-    Queue\SerializesModels,
-    Database\Eloquent\Model
-};
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\Eloquent\Model;
 
-class PostUpdated
-{
-    use SerializesModels;
 
-    public $model;
+class PostUpdated {
+	use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @param Model $model
-     */
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+	public $model;
+
+	/**
+	 * Create a new event instance.
+	 *
+	 * @param Model $model
+	 */
+	public function __construct( Model $model )
+	{
+		$this->model = $model;
+	}
 }
