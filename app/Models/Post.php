@@ -102,6 +102,6 @@ class Post extends Model {
 
 	public function userWithName()
 	{
-		return $this->belongsTo('User')->select(array('id', 'name', 'email'));
+		return $this->belongsTo( 'User' )->select( [ 'id', 'name', 'email' ] );
 	}
 }
