@@ -159,12 +159,13 @@ Route::prefix( 'admin' )->namespace( 'Back' )->group( function () {
 		// Users
 		Route::name( 'users.seen' )->put( 'users/seen/{user}', 'UserController@updateSeen' );
 		Route::name( 'users.valid' )->put( 'users/valid/{user}', 'UserController@updateValid' );
-		Route::resource( 'users', 'UserController', [ 'only' => [
-			'index',
-			'edit',
-			'update',
-			'destroy'
-		]
+		Route::resource( 'users', 'UserController', [
+			'only' => [
+				'index',
+				'edit',
+				'update',
+				'destroy'
+			]
 		] );
 
 		// Categories
@@ -172,18 +173,20 @@ Route::prefix( 'admin' )->namespace( 'Back' )->group( function () {
 
 		// Contacts
 		Route::name( 'contacts.seen' )->put( 'contacts/seen/{contact}', 'ContactController@updateSeen' );
-		Route::resource( 'contacts', 'ContactController', [ 'only' => [
-			'index',
-			'destroy'
-		]
+		Route::resource( 'contacts', 'ContactController', [
+			'only' => [
+				'index',
+				'destroy'
+			]
 		] );
 
 		// Comments
 		Route::name( 'comments.seen' )->put( 'comments/seen/{comment}', 'CommentController@updateSeen' );
-		Route::resource( 'comments', 'CommentController', [ 'only' => [
-			'index',
-			'destroy'
-		]
+		Route::resource( 'comments', 'CommentController', [
+			'only' => [
+				'index',
+				'destroy'
+			]
 		] );
 
 		// Settings
