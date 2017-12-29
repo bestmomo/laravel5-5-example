@@ -27,7 +27,7 @@
 					<h1 class="page-title">{{ $post->title }}</h1>
 
 					<ul class="entry-meta">
-						<li class="date">{{ $post->created_at->formatLocalized('%A %d %B %Y') }}</li>
+						<li class="date">{{ ucfirst (utf8_encode ($post->created_at->formatLocalized('%A %d %B %Y'))) }}</li>
                         <li class="cat">
                             @foreach ($post->categories as $category)
                                 <a href="{{ route('category', [$category->slug]) }}">{{ $category->title }}</a>
