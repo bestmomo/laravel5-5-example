@@ -8,6 +8,7 @@ use App\Http\ViewComposers\MenuComposer;
 use App\Http\ViewComposers\HeaderComposer;
 use Laravel\Dusk\DuskServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,9 +21,9 @@ class AppServiceProvider extends ServiceProvider
     {
         setLocale(LC_TIME, config('app.locale'));
 
-        view()->composer('front/layout',MenuComposer::class);
+        view()->composer('front/layout', MenuComposer::class);
 
-        view()->composer('back/layout',HeaderComposer::class);
+        view()->composer('back/layout', HeaderComposer::class);
 
         Blade::if('admin', function () {
             return auth()->user()->role === 'admin';
@@ -35,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('request', function ($url) {
             return request()->is($url);
         });
+
+        Schema::defaultStringLength(191);
     }
 
     /**
