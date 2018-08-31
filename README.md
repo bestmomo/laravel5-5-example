@@ -17,7 +17,7 @@
    * set DB_PASSWORD
 * if you use sqlite :
    * type `touch database/database.sqlite` to create the file
-* type `php artisan vendor:publish --provider="Bestmomo\LaravelEmailConfirmationServiceProvider" --tag="confirmation:migrations"` to publish email confirmation migration
+* type `php artisan vendor:publish --provider="Bestmomo\LaravelEmailConfirmation\ServiceProvider" --tag="confirmation:migrations"` to publish email confirmation migration
 * type `php artisan migrate --seed` to create and populate tables
 * edit *.env* for emails configuration
 
