@@ -26,7 +26,7 @@
 * [Styleshout](https://www.styleshout.com/) for front template
 * [CKEditor](http://ckeditor.com) the great editor
 * [Elfinder](https://github.com/Studio-42/elFinder) the nice file manager
-* [Sweat Alert](http://t4t5.github.io/sweetalert/) for the cool alerts
+* [Sweet Alert](http://t4t5.github.io/sweetalert/) for the cool alerts
 * [AdminLTE](https://adminlte.io/themes/AdminLTE/index2.html) the great admin template
 * [Gravatar](https://github.com/creativeorange/gravatar) the Gravatar package
 * [Intervention Image](http://image.intervention.io/) for image manipulation
