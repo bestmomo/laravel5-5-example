@@ -8,6 +8,7 @@ use App\Http\ViewComposers\MenuComposer;
 use App\Http\ViewComposers\HeaderComposer;
 use Laravel\Dusk\DuskServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         setLocale(LC_TIME, config('app.locale'));
+        Schema::defaultStringLength(191);
 
         view()->composer('front/layout',MenuComposer::class);
 
