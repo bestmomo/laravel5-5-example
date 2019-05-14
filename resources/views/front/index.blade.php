@@ -30,7 +30,7 @@
 
                 @foreach($posts as $post)
 
-                    @include('front.brick-standard', compact('$post'))
+                    @include('front.brick-standard', compact('post'))
 
                 @endforeach
 
