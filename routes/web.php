@@ -40,6 +40,13 @@ Route::resource('comments', 'Front\CommentController', [
 
 Route::name('category')->get('category/{category}', 'Front\PostController@category');
 
+Route::prefix('test')->namespace('Front')->group(function () {
+    Route::get('how-to-lose-weight', 'FatController@show');
+});
+
+
+
+
 // Authentification
 Auth::routes();
 
@@ -67,6 +74,11 @@ Route::prefix('admin')->namespace('Back')->group(function () {
 
         // Medias
         Route::view('medias', 'back.medias')->name('medias.index');
+
+        Route::name('notifications.index')->get('notifications/{user}', 'NotificationController@index');
+
+
+
 
     });
 
